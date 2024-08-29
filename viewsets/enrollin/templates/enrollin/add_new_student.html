@@ -1,0 +1,19 @@
+{% extends "enrollin/base.html" %}
+
+{% block title %}
+Add Student Information
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="cols-sm-8 offset-2">
+        <h3 class="text-center alert alert-info">Add new Student info</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add" class="btn btn-success">
+            <a href="{% url 'add_show' %}" class="btn btn-info">BACK TO HOME</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

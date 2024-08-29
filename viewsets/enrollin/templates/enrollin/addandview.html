@@ -1,0 +1,62 @@
+{% extends "enrollin/base.html" %}
+
+{% block title %}
+CRUD - APPLICATION - View and Add
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="cols-sm-4">
+        <h3 class="text-center alert alert-info">Add new Teachers info</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add" class="btn btn-success">
+        </form>
+    </div>
+    <div class="cols-sm-7 offset-1">
+        <h3 class="text-center alert alert-info">View Teachers info</h3>
+        
+        {% if teacher %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">password</th>
+                <th scope="col">email</th>
+                <th scope="col">phone</th>
+                <th scope="col">address</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for st in teacher %}
+              <tr>
+                <th scope="row">{{ st.id }}</th>
+                <td>{{ st.first_name }}</td>
+                <td>{{ st.last_name }}</td>
+                <td>{{ st.password }}</td>
+                <td>{{ st.email }}</td>
+                <td>{{ st.phone }}</td>
+                <td>{{ st.address }}</td>
+                <td>
+                  <a href="{% url 'update_data' st.id %}" class="btn btn-warning btn-sm">Edit</a>
+                  <form action="{% url 'delete_data' st.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <input type="submit" value="Delete" class="btn btn-danger">
+                  </form>
+                  <a href="{% url 'add_student' %}" class="btn btn-warning btn-sm">Add a New Student</a>
+                  <a href="{% url 'view_student_detail' st.id %}" class="btn btn-warning btn-sm">view Student Info</a>
+              </td> 
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+        <h3 class="text-center alert alert-info">No data found</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

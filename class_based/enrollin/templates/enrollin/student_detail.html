@@ -1,0 +1,37 @@
+{% extends "enrollin/base.html" %}
+
+{% block title %}
+Student Details
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-8 offset-2">
+        <h3 class="text-center alert alert-info">Student Details</h3>
+        {% if student %}
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">first_name</th>
+                  <th scope="col">last_name</th>
+                  <th scope="col">image</th>
+                  <th scope="col">teachers</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for st in student %}
+                <tr>
+                  <th scope="row">{{ st.id }}</th>
+                  <td>{{ st.first_name }}</td>
+                  <td>{{ st.last_name }}</td>
+                  <td>{{ st.image }}</td>
+                  <td>{{ st.teachers }}</td> 
+                </tr>
+                {% endfor %}
+        </table>
+        {% endif %}
+        <a href="{% url 'add_show' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock content %}
